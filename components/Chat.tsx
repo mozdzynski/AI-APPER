@@ -26,17 +26,17 @@ const Chat: React.FC<ChatProps> = ({ messages, onSendMessage, isLoading }) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="p-4 bg-gray-50 border-b border-gray-100 flex items-center space-x-2">
+    <div className="flex flex-col h-full bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden transition-colors">
+      <div className="p-4 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-100 dark:border-gray-700 flex items-center space-x-2 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
         </svg>
-        <h3 className="font-semibold text-gray-700">Design Assistant</h3>
+        <h3 className="font-semibold text-gray-700 dark:text-gray-200">Design Assistant</h3>
       </div>
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
-          <div className="text-center text-gray-400 mt-10">
+          <div className="text-center text-gray-400 dark:text-gray-500 mt-10">
             <p className="text-sm">Ask me about furniture, color matching, or where to buy items seen in your design.</p>
           </div>
         )}
@@ -46,10 +46,10 @@ const Chat: React.FC<ChatProps> = ({ messages, onSendMessage, isLoading }) => {
             className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
           >
             <div
-              className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm ${
+              className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm transition-colors ${
                 msg.role === 'user'
                   ? 'bg-primary text-white rounded-br-none'
-                  : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-bl-none'
               }`}
             >
               <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
@@ -64,7 +64,7 @@ const Chat: React.FC<ChatProps> = ({ messages, onSendMessage, isLoading }) => {
                     href={source.uri}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-1 text-xs bg-white border border-gray-200 text-gray-600 px-2 py-1 rounded-full hover:bg-gray-50 transition-colors"
+                    className="flex items-center space-x-1 text-xs bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -74,28 +74,28 @@ const Chat: React.FC<ChatProps> = ({ messages, onSendMessage, isLoading }) => {
                 ))}
               </div>
             )}
-            <span className="text-[10px] text-gray-400 mt-1 px-1">
+            <span className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 px-1">
               {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
           </div>
         ))}
         {isLoading && (
           <div className="flex items-center space-x-2 text-gray-400 text-sm p-2">
-            <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" />
-            <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-            <div className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+            <div className="w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded-full animate-bounce" />
+            <div className="w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+            <div className="w-2 h-2 bg-gray-300 dark:bg-gray-600 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
           </div>
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="p-3 border-t border-gray-100 bg-white">
+      <form onSubmit={handleSubmit} className="p-3 border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors">
         <div className="relative">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about decor or prices..."
-            className="w-full pl-4 pr-12 py-3 bg-gray-50 border-transparent focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl text-sm transition-all outline-none"
+            className="w-full pl-4 pr-12 py-3 bg-gray-50 dark:bg-gray-700 border-transparent focus:bg-white dark:focus:bg-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl text-sm text-gray-900 dark:text-white dark:placeholder-gray-400 transition-all outline-none"
           />
           <button
             type="submit"
